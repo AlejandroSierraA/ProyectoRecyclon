@@ -4,6 +4,9 @@
 
 package org.zabalburu.daw1.proyecto_recyclon_java;
 
+import org.zabalburu.daw1.proyecto_recyclon_java.views.Vista_Inicio_Sesion;
+import org.zabalburu.daw1.proyecto_recyclon_java.views.Vista_Inicio_Sesion_Usuario;
+
 /**
  *
  * @author DAW1
@@ -11,6 +14,6 @@ package org.zabalburu.daw1.proyecto_recyclon_java;
 public class Proyecto_recyclon_Java {
 
     public static void main(String[] args) {
-        
+        new Vista_Inicio_Sesion_Usuario().setVisible(true);
     }
 }

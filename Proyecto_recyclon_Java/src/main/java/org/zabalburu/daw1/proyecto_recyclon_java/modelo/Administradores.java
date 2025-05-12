@@ -16,11 +16,11 @@ import lombok.Setter;
  */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Setter
 @Getter
-public class Usuarios {
+@Setter
+public class Administradores {
     @EqualsAndHashCode.Include
-    private int id_Usuario;
+    private int id_Administrador;
     private String nombre;
     private String apellido;
     private String email;
@@ -29,8 +29,11 @@ public class Usuarios {
     private Date fecha_Creacion;
     private String telefono;
     
+    
     @Override
     public String toString(){
-        return "id del usuario: %s" + " - " + " nombre del usuario:" + " %s-%s".formatted(id_Usuario, nombre, apellido);
+        
+        return "id del administrador: %s" + " - " + " nombre del administrador:" + " %s-%s".formatted(id_Administrador, nombre, apellido);
+        
     }
 }

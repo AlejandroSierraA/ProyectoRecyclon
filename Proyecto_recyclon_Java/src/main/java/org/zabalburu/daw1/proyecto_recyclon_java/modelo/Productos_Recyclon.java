@@ -17,6 +17,16 @@ import lombok.Setter;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Setter
 @Getter
-public class Productos {
+public class Productos_Recyclon {
+    @EqualsAndHashCode.Include
+    private int idProducto;
+    private String nombre;
+    private String descripcion;
+    private String tipo_Material;
+    private double precio;
     
+    @Override
+    public String toString(){
+        return "Id del producto: " + "%s" + " - " + "nombre del producto: " + "%s" + " - " + "Precio: " + "%d".formatted(idProducto,nombre,precio);
+    }
 }
