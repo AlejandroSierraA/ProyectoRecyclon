@@ -27,6 +27,6 @@ public class Productos_Recyclon {
     
     @Override
     public String toString(){
-        return "Id del producto: " + "%s" + " - " + "nombre del producto: " + "%s" + " - " + "Precio: " + "%d".formatted(idProducto,nombre,precio);
+        return "Id del producto: " + this.idProducto + " - " + "nombre del producto: " + this.getNombre() + " - " + "Precio: " + this.getPrecio();
     }
 }

@@ -4,8 +4,8 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
-import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
-import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
+import javax.swing.JFrame;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Administradores;
 
 /**
  *
@@ -18,6 +18,7 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
      */
     public Vista_Registrar_Administrador() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -31,6 +32,7 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
 
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        BtnModificar = new javax.swing.JButton();
         PnlDatos = new javax.swing.JPanel();
         LblIdAdmin = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
@@ -49,13 +51,21 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
         TxtTelefono = new javax.swing.JTextField();
         LblFechaCreacion = new javax.swing.JLabel();
         PnlBotones = new javax.swing.JPanel();
-        BtnEliminar = new javax.swing.JButton();
-        BtnModificar = new javax.swing.JButton();
+        BtnGuardar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Registrar Administrador");
+
+        BtnModificar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnModificar.setText("Registrar Administrador");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
@@ -64,14 +74,18 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
-                .addGap(219, 219, 219))
+                .addGap(18, 18, 18)
+                .addComponent(BtnModificar)
+                .addGap(20, 20, 20))
         );
         PnlTituloLayout.setVerticalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(LblTitulo)
-                .addGap(17, 17, 17))
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnModificar)
+                    .addComponent(LblTitulo))
+                .addContainerGap())
         );
 
         LblIdAdmin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -164,7 +178,8 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                     .addGroup(PnlDatosLayout.createSequentialGroup()
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblIdAdmin)
-                            .addComponent(LblNombre))
+                            .addComponent(LblNombre)
+                            .addComponent(LblFechaCreacion))
                         .addGap(45, 45, 45)
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnlDatosLayout.createSequentialGroup()
@@ -181,14 +196,13 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                                     .addComponent(LblApellido)
                                     .addComponent(LblCP)
                                     .addComponent(LblTelefono)))))
-                    .addComponent(LblDireccion)
-                    .addComponent(LblFechaCreacion))
+                    .addComponent(LblDireccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(TxtTelefono)
                     .addComponent(TxtApellido)
-                    .addComponent(TxtCP)
-                    .addComponent(TxtTelefono))
+                    .addComponent(TxtCP, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(60, 60, 60))
         );
         PnlDatosLayout.setVerticalGroup(
@@ -200,40 +214,41 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                     .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblEmail)
                     .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblApellido)
-                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LblApellido))
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblDireccion)
                     .addComponent(LblCP)
                     .addComponent(TxtCP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblFechaCreacion)
-                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblTelefono))
-                .addGap(25, 25, 25))
+                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTelefono)
+                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        BtnEliminar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnEliminar.setText("Guardar");
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnGuardar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnGuardar.setText("Guardar");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
+                BtnGuardarActionPerformed(evt);
             }
         });
 
-        BtnModificar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnModificar.setText("Registrar Administrador");
-        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -242,20 +257,20 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
         PnlBotonesLayout.setHorizontalGroup(
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlBotonesLayout.createSequentialGroup()
-                .addGap(258, 258, 258)
-                .addComponent(BtnEliminar)
-                .addGap(35, 35, 35)
-                .addComponent(BtnModificar)
+                .addGap(256, 256, 256)
+                .addComponent(BtnGuardar)
+                .addGap(88, 88, 88)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnlBotonesLayout.setVerticalGroup(
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlBotonesLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(PnlBotonesLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnEliminar)
-                    .addComponent(BtnModificar))
-                .addGap(21, 21, 21))
+                    .addComponent(BtnGuardar)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,8 +279,8 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PnlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(PnlBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -275,8 +290,9 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                 .addComponent(PnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(PnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(PnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -298,12 +314,20 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDireccionActionPerformed
 
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnEliminarActionPerformed
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        Administradores modificar = new Administradores();
+        modificar.setEmail(TxtEmail.getText());
+        modificar.setNombre(TxtNombre.getText());
+        modificar.setApellido(TxtApellido.getText());
+        modificar.setDireccion(TxtDireccion.getText());
+        modificar.setCP(TxtCP.getText());
+        modificar.setTelefono(TxtTelefono.getText());
+       
+    }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        Vista_Registrar_Usuarios vista = new Vista_Registrar_Usuarios();
+        vista.setVisible(true);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
@@ -321,6 +345,10 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,7 +401,7 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JLabel LblApellido;
     private javax.swing.JLabel LblCP;
@@ -395,5 +423,6 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

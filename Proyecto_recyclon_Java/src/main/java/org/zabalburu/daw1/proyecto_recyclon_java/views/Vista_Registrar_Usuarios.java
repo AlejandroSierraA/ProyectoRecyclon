@@ -4,6 +4,7 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import javax.swing.JFrame;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 
@@ -18,6 +19,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
      */
     public Vista_Registrar_Usuarios() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -31,6 +33,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
 
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        BtnModificar = new javax.swing.JButton();
         PnlDatos = new javax.swing.JPanel();
         LblIdUsuario = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
@@ -50,12 +53,20 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         LblFechaCreacion = new javax.swing.JLabel();
         PnlBotones = new javax.swing.JPanel();
         BtnEliminar = new javax.swing.JButton();
-        BtnModificar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Registrar Usuario");
+
+        BtnModificar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnModificar.setText("Registrar Usuario");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
@@ -64,13 +75,17 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(271, 271, 271)
                 .addComponent(LblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnModificar)
+                .addGap(39, 39, 39))
         );
         PnlTituloLayout.setVerticalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(LblTitulo)
+                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnModificar)
+                    .addComponent(LblTitulo))
                 .addGap(16, 16, 16))
         );
 
@@ -188,10 +203,10 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
                         .addComponent(LblTelefono)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(TxtApellido)
-                    .addComponent(TxtCP)
-                    .addComponent(TxtTelefono))
+                    .addComponent(TxtTelefono)
+                    .addComponent(TxtCP))
                 .addGap(60, 60, 60))
         );
         PnlDatosLayout.setVerticalGroup(
@@ -237,11 +252,11 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        BtnModificar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnModificar.setText("Registrar Administrador");
-        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -252,8 +267,8 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(PnlBotonesLayout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(BtnEliminar)
-                .addGap(35, 35, 35)
-                .addComponent(BtnModificar)
+                .addGap(58, 58, 58)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnlBotonesLayout.setVerticalGroup(
@@ -262,7 +277,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnEliminar)
-                    .addComponent(BtnModificar))
+                    .addComponent(jButton1))
                 .addGap(21, 21, 21))
         );
 
@@ -307,11 +322,18 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDireccionActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        Usuarios modificar = new Usuarios();
+        modificar.setEmail(TxtEmail.getText());
+        modificar.setNombre(TxtNombre.getText());
+        modificar.setApellido(TxtApellido.getText());
+        modificar.setDireccion(TxtDireccion.getText());
+        modificar.setCP(TxtCP.getText());
+        modificar.setTelefono(TxtTelefono.getText());
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        Vista_Registrar_Administrador vista = new Vista_Registrar_Administrador();
+        vista.setVisible(true);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
@@ -329,6 +351,10 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,5 +421,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

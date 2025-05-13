@@ -4,17 +4,27 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.util.List;
+import javax.swing.JFrame;
+import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Administradores;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
+
 /**
  *
  * @author DAW1
  */
 public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
-
+    private static final int CONSULTA = 1;
+    private int estado = CONSULTA;
+    private DAO dao = new DAO();
     /**
      * Creates new form Vista_proyecto
      */
     public Vista_Inicio_Sesion_Usuario() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
     }
 
     /**
@@ -33,14 +43,12 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
         LblnombreAdmin = new javax.swing.JLabel();
         TxtNombre = new javax.swing.JTextField();
         LblApellidoAdmin = new javax.swing.JLabel();
-        TxtAdmin = new javax.swing.JTextField();
+        TxtApellido = new javax.swing.JTextField();
         LblTitulo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         PnlBotones = new javax.swing.JPanel();
         BtnIniciarSesion = new javax.swing.JButton();
         BtnRegistrarse = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblIdAdmin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LblIdAdmin.setText("Id Usuario");
@@ -65,10 +73,10 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
         LblApellidoAdmin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblApellidoAdmin.setText("Nombre Usuario");
 
-        TxtAdmin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtAdmin.addActionListener(new java.awt.event.ActionListener() {
+        TxtApellido.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        TxtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtAdminActionPerformed(evt);
+                TxtApellidoActionPerformed(evt);
             }
         });
 
@@ -86,7 +94,7 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
                 .addGroup(PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TxtId)
                     .addComponent(TxtNombre)
-                    .addComponent(TxtAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         PnlCuerpoLayout.setVerticalGroup(
@@ -103,7 +111,7 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblApellidoAdmin)
-                    .addComponent(TxtAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -200,9 +208,9 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAdminActionPerformed
+    private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtAdminActionPerformed
+    }//GEN-LAST:event_TxtApellidoActionPerformed
 
     private void TxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreActionPerformed
         // TODO add your handling code here:
@@ -213,15 +221,25 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtIdActionPerformed
 
     private void BtnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIniciarSesionActionPerformed
-        // TODO add your handling code here:
+        Usuarios us = (Usuarios)dao.getUsuarios();
+        if(TxtId.getText().equals(us.getId_Usuario())){
+            if(TxtNombre.getText().equals(us.getNombre())){
+                if(TxtApellido.getText().equals(us.getApellido())){
+                    Vista_Usuarios vista = new Vista_Usuarios();
+                    vista.setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_BtnIniciarSesionActionPerformed
 
     private void BtnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarseActionPerformed
-        
+        Vista_Registrar_Usuarios vista = new Vista_Registrar_Usuarios();
+        vista.setVisible(true);
     }//GEN-LAST:event_BtnRegistrarseActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       Vista_Inicio_Sesion vista = new Vista_Inicio_Sesion(); 
+       vista.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -272,7 +290,7 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel PnlBotones;
     private javax.swing.JPanel PnlCuerpo;
     private javax.swing.JPanel PnlTitulo;
-    private javax.swing.JTextField TxtAdmin;
+    private javax.swing.JTextField TxtApellido;
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JButton jButton1;

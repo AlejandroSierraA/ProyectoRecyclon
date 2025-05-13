@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.zabalburu.daw1.proyecto_recyclon_java.conexion.Conexion;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Administradores;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 
@@ -28,7 +29,7 @@ public class DAO {
         try {
             ResultSet rst = cnn.createStatement()
                     .executeQuery("""
-                                                  Select * From Productos Productos_Recyclon
+                                                  Select * From Productos_Recyclon
                                                   Order By idProducto
                                                   """);
             while(rst.next()){
@@ -39,9 +40,27 @@ public class DAO {
         }
         return productos;
     }
-
-    private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
+    public List<Administradores> getAdministradores(){
+        List<Administradores> Admin = new ArrayList<>();
+        try {
+            ResultSet rst = cnn.createStatement()
+                    .executeQuery("""
+                                                      Select * From Administradores
+                                                      Order By id_Administrador
+                                                      """);
+            while(rst.next()){
+                Admin.add(crearAdministrador(rst));
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Admin;
+    }
+private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
         Productos_Recyclon p = new Productos_Recyclon();
+        p.setIdProducto(rst.getInt("idProducto"));
         p.setNombre(rst.getString("nombre"));
         p.setDescripcion(rst.getString("descripcion"));
         p.setTipo_Material(rst.getString("tipo_Material"));
@@ -67,6 +86,7 @@ public class DAO {
 
     private Usuarios crearUsuario(ResultSet rst) throws SQLException {
         Usuarios u = new Usuarios();
+        u.setId_Usuario(rst.getInt("id_Usuario"));
         u.setNombre(rst.getString("nombre"));
         u.setApellido(rst.getString("apellido"));
         u.setEmail(rst.getString("email"));
@@ -89,6 +109,7 @@ public class DAO {
             pst.setString(3, modificado.getTipo_Material());
             pst.setDouble(4, modificado.getPrecio());
             pst.setInt(5, modificado.getIdProducto());
+            pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -220,6 +241,18 @@ public class DAO {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    private Administradores crearAdministrador(ResultSet rst) throws SQLException {
+        Administradores ad = new Administradores();
+        ad.setNombre(rst.getString("nombre"));
+        ad.setApellido(rst.getString("apellido"));
+        ad.setEmail(rst.getString("email"));
+        ad.setDireccion(rst.getString("direccion"));
+        ad.setCP(rst.getString("CP"));
+        ad.setFecha_Creacion(rst.getDate("fecha_Creacion"));
+        ad.setTelefono(rst.getString("telefono"));
+        return ad;
     }
     
 }

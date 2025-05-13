@@ -33,7 +33,7 @@ public class Administradores {
     @Override
     public String toString(){
         
-        return "id del administrador: %s" + " - " + " nombre del administrador:" + " %s-%s".formatted(id_Administrador, nombre, apellido);
+        return "id del administrador: " + this.getId_Administrador() + " - " + " nombre del administrador: " + this.getNombre() + " " + this.apellido;
         
     }
 }

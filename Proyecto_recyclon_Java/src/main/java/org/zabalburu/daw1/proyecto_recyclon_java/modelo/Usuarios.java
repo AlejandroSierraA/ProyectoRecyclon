@@ -31,6 +31,6 @@ public class Usuarios {
     
     @Override
     public String toString(){
-        return "id del usuario: %s" + " - " + " nombre del usuario:" + " %s-%s".formatted(id_Usuario, nombre, apellido);
+        return "id del administrador: " + this.getId_Usuario() + " - " + " nombre del administrador: " + this.getNombre() + " " + this.apellido;
     }
 }

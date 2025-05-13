@@ -6,7 +6,8 @@ package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.Vector;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 
@@ -18,6 +19,7 @@ import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private static final int CONSULTA = 1;
     private static final int MODIFICACION = 2;
+    private static final int NEW = 3;
     
     private int estado = CONSULTA;
     
@@ -30,8 +32,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
      */
     public Vista_Administrador_Usuarios_1() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarUsuarios();
         mostrar();
+        
     }
 
     /**
@@ -45,6 +49,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
 
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        BtnModificarProductos = new javax.swing.JButton();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxUsuarios = new javax.swing.JComboBox<>();
@@ -68,12 +73,20 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         BtnAñadirProducto = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
-        BtnModificarProductos = new javax.swing.JButton();
+        BtnGuardar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Administrador");
+
+        BtnModificarProductos.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnModificarProductos.setText("Modificar Productos");
+        BtnModificarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarProductosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
@@ -82,13 +95,17 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(292, 292, 292)
                 .addComponent(LblTitulo)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(BtnModificarProductos)
+                .addGap(38, 38, 38))
         );
         PnlTituloLayout.setVerticalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(LblTitulo)
+                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnModificarProductos)
+                    .addComponent(LblTitulo))
                 .addGap(17, 17, 17))
         );
 
@@ -284,11 +301,11 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             }
         });
 
-        BtnModificarProductos.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnModificarProductos.setText("Modificar Productos");
-        BtnModificarProductos.addActionListener(new java.awt.event.ActionListener() {
+        BtnGuardar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnGuardar.setText("Guardar Cambios");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarProductosActionPerformed(evt);
+                BtnGuardarActionPerformed(evt);
             }
         });
 
@@ -304,7 +321,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BtnModificar)
                 .addGap(18, 18, 18)
-                .addComponent(BtnModificarProductos)
+                .addComponent(BtnGuardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnlBotonesLayout.setVerticalGroup(
@@ -315,7 +332,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                     .addComponent(BtnAñadirProducto)
                     .addComponent(BtnEliminar)
                     .addComponent(BtnModificar)
-                    .addComponent(BtnModificarProductos))
+                    .addComponent(BtnGuardar))
                 .addGap(21, 21, 21))
         );
 
@@ -361,23 +378,38 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDireccionActionPerformed
 
     private void BtnAñadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirProductoActionPerformed
-        // TODO add your handling code here:
+        estado = NEW;
+        mostrar();
     }//GEN-LAST:event_BtnAñadirProductoActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this, 
+                "Está seguro",
+                "Eliminar Usuario",
+                JOptionPane.YES_NO_OPTION)
+                ==
+                JOptionPane.YES_OPTION){
+            int id = Integer.parseInt(TxtId.getText());
+            if(dao.eliminarUsuario(id)){
+                JOptionPane.showMessageDialog(this, "Usuario Eliminado");
+            }
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        estado = MODIFICACION;
+        mostrar();
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnModificarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarProductosActionPerformed
-        // TODO add your handling code here:
+        Vista_administrador_productos_1 ventana = new Vista_administrador_productos_1();
+        ventana.setVisible(true);
+        mostrar();
     }//GEN-LAST:event_BtnModificarProductosActionPerformed
 
     private void CbxUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxUsuariosActionPerformed
-        // TODO add your handling code here:
+      estado = CONSULTA;
+      mostrar();
     }//GEN-LAST:event_CbxUsuariosActionPerformed
 
     private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
@@ -395,6 +427,17 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoActionPerformed
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        Usuarios modificar = new Usuarios();
+        modificar.setEmail(TxtEmail.getText());
+        modificar.setNombre(TxtNombre.getText());
+        modificar.setApellido(TxtApellido.getText());
+        modificar.setDireccion(TxtDireccion.getText());
+        modificar.setCP(TxtCP.getText());
+        modificar.setTelefono(TxtTelefono.getText());
+        mostrar();
+    }//GEN-LAST:event_BtnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -437,6 +480,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAñadirProducto;
     private javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JButton BtnModificarProductos;
     private javax.swing.JComboBox<Usuarios> CbxUsuarios;
@@ -485,7 +529,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtNombre.setEditable(estado != CONSULTA);
         TxtCP.setEditable(estado != CONSULTA);
         TxtDireccion.setEditable(estado != CONSULTA);
-        TxtFecha.setEditable(estado != CONSULTA);
+        TxtFecha.setEditable(false);
         TxtTelefono.setEditable(estado != CONSULTA);
         TxtEmail.setEditable(estado != CONSULTA);
         TxtId.setEditable(false);

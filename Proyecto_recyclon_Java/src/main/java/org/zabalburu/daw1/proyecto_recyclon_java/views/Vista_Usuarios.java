@@ -4,6 +4,10 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.text.NumberFormat;
+import java.util.List;
+import javax.swing.JFrame;
+import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 
 /**
@@ -11,12 +15,18 @@ import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
  * @author DAW1
  */
 public class Vista_Usuarios extends javax.swing.JFrame {
-
+    
+    private DAO dao = new DAO();
+    
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+    
     /**
      * Creates new form Vista_administrador
      */
     public Vista_Usuarios() {
         initComponents();
+        cargarProductos();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -53,7 +63,7 @@ public class Vista_Usuarios extends javax.swing.JFrame {
 
         jTextField5.setText("jTextField5");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Usuarios");
@@ -268,11 +278,12 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-        // TODO add your handling code here:
+        Vista_Inicio_Sesion_Usuario vista = new Vista_Inicio_Sesion_Usuario();
+        vista.setVisible(true);
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void BtnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_BtnCerrarSesionActionPerformed
 
     private void CbxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxProductoActionPerformed
@@ -343,4 +354,22 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+    
+    private void cargarProductos(){
+        CbxProducto.removeAllItems();
+        List<Productos_Recyclon> pro = dao.getProductos();
+        for(Productos_Recyclon p: pro){
+            CbxProducto.addItem(p);
+        }
+    }
+    
+    private void mostrar(){
+        Productos_Recyclon seleccionado = (Productos_Recyclon) CbxProducto.getSelectedItem();
+        TxtId.setText(String.valueOf(seleccionado.getIdProducto()));
+        TxtDescripcion.setText(String.valueOf(seleccionado.getDescripcion()));
+        TxtNombre.setText(String.valueOf(seleccionado.getNombre()));
+        TxtTipoMaterial.setText(String.valueOf(seleccionado.getTipo_Material()));
+        TxtPrecio.setText(String.valueOf(nf.format(seleccionado.getPrecio())));
+    }
+
 }

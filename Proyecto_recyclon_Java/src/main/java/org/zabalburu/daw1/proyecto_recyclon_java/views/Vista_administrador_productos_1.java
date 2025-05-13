@@ -4,6 +4,11 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.awt.event.ActionEvent;
+import java.text.NumberFormat;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 
 /**
@@ -11,12 +16,24 @@ import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
  * @author DAW1
  */
 public class Vista_administrador_productos_1 extends javax.swing.JFrame {
-
+     private static final int CONSULTA = 1;
+    private static final int MODIFICACION = 2;
+    private static final int NEW = 3;
+    
+    private int estado = CONSULTA;
+    
+    private List<Productos_Recyclon> pro;
+    
+    private DAO dao = new DAO();
+    private int pos = 0;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
     /**
      * Creates new form Vista_administrador
      */
     public Vista_administrador_productos_1() {
         initComponents();
+        cargarProducto();
+        mostrar();
     }
 
     /**
@@ -32,33 +49,42 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        BtnModificarUsuarios = new javax.swing.JButton();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxProducto = new javax.swing.JComboBox<>();
         LblIdProducto = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
         LblPrecio = new javax.swing.JLabel();
-        TxtPrecio = new javax.swing.JTextField();
         LblNombre = new javax.swing.JLabel();
         TxtNombre = new javax.swing.JTextField();
         LblTipoMaterial = new javax.swing.JLabel();
         TxtTipoMaterial = new javax.swing.JTextField();
         LblDescripcion = new javax.swing.JLabel();
         TxtDescripcion = new javax.swing.JTextField();
+        ftxPrecio = new javax.swing.JFormattedTextField();
         PnlBotones = new javax.swing.JPanel();
         BtnAñadirProducto = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
-        BtnModificarUsuarios = new javax.swing.JButton();
+        BtnGuardar = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
         jTextField5.setText("jTextField5");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Administrador");
+
+        BtnModificarUsuarios.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnModificarUsuarios.setText("Modificar Usuarios");
+        BtnModificarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarUsuariosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
@@ -67,13 +93,17 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(292, 292, 292)
                 .addComponent(LblTitulo)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnModificarUsuarios)
+                .addGap(52, 52, 52))
         );
         PnlTituloLayout.setVerticalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(LblTitulo)
+                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnModificarUsuarios)
+                    .addComponent(LblTitulo))
                 .addGap(17, 17, 17))
         );
 
@@ -100,13 +130,6 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         LblPrecio.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblPrecio.setText("Precio");
 
-        TxtPrecio.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPrecioActionPerformed(evt);
-            }
-        });
-
         LblNombre.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblNombre.setText("Nombre");
 
@@ -132,6 +155,13 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             }
         });
 
+        ftxPrecio.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        ftxPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxPrecioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlDatosLayout = new javax.swing.GroupLayout(PnlDatos);
         PnlDatos.setLayout(PnlDatosLayout);
         PnlDatosLayout.setHorizontalGroup(
@@ -149,20 +179,22 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
                             .addComponent(LblNombre))
                         .addGap(45, 45, 45)
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LblPrecio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LblTipoMaterial)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtTipoMaterial))
                             .addComponent(TxtDescripcion)
-                            .addComponent(CbxProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(CbxProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PnlDatosLayout.createSequentialGroup()
+                                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PnlDatosLayout.createSequentialGroup()
+                                        .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(LblTipoMaterial))
+                                    .addGroup(PnlDatosLayout.createSequentialGroup()
+                                        .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(LblPrecio)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtTipoMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                    .addComponent(ftxPrecio))))
                         .addGap(60, 60, 60))))
         );
         PnlDatosLayout.setVerticalGroup(
@@ -177,7 +209,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
                     .addComponent(LblIdProducto)
                     .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblPrecio)
-                    .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,11 +247,11 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             }
         });
 
-        BtnModificarUsuarios.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnModificarUsuarios.setText("Modificar Usuarios");
-        BtnModificarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        BtnGuardar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnGuardar.setText("Guardar Cambios");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarUsuariosActionPerformed(evt);
+                BtnGuardarActionPerformed(evt);
             }
         });
 
@@ -235,7 +267,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BtnModificar)
                 .addGap(18, 18, 18)
-                .addComponent(BtnModificarUsuarios)
+                .addComponent(BtnGuardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnlBotonesLayout.setVerticalGroup(
@@ -246,7 +278,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
                     .addComponent(BtnAñadirProducto)
                     .addComponent(BtnEliminar)
                     .addComponent(BtnModificar)
-                    .addComponent(BtnModificarUsuarios))
+                    .addComponent(BtnGuardar))
                 .addGap(21, 21, 21))
         );
 
@@ -279,10 +311,6 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtIdActionPerformed
 
-    private void TxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPrecioActionPerformed
-
     private void TxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNombreActionPerformed
@@ -292,24 +320,47 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void BtnAñadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirProductoActionPerformed
-        // TODO add your handling code here:
+        estado = NEW;  
+        mostrar();
     }//GEN-LAST:event_BtnAñadirProductoActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this, 
+                "Está seguro",
+                "Eliminar Producto",
+                JOptionPane.YES_NO_OPTION)
+                ==
+                JOptionPane.YES_OPTION){
+            int id = Integer.parseInt(TxtId.getText());
+            if(dao.eliminarProducto(id)){
+                JOptionPane.showMessageDialog(this, "Producto Eliminado");
+            }
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        estado = MODIFICACION;
+        mostrar();
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnModificarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarUsuariosActionPerformed
-        // TODO add your handling code here:
+        Vista_Administrador_Usuarios_1 ventana = new Vista_Administrador_Usuarios_1();
+        ventana.setVisible(true);
     }//GEN-LAST:event_BtnModificarUsuariosActionPerformed
 
     private void CbxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxProductoActionPerformed
-        // TODO add your handling code here:
+        estado = CONSULTA;
+        mostrar();
     }//GEN-LAST:event_CbxProductoActionPerformed
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        saveProducto(evt);
+        estado = CONSULTA;
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void ftxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxPrecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,6 +403,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAñadirProducto;
     private javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JButton BtnModificarUsuarios;
     private javax.swing.JComboBox<Productos_Recyclon> CbxProducto;
@@ -368,9 +420,58 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     private javax.swing.JTextField TxtDescripcion;
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
-    private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtTipoMaterial;
+    private javax.swing.JFormattedTextField ftxPrecio;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrar() {
+        if(estado == NEW){
+            TxtId.setText("");
+            TxtDescripcion.setText("");
+            TxtNombre.setText("");
+            TxtTipoMaterial.setText("");
+            ftxPrecio.setText("");
+            
+        }
+        Productos_Recyclon pro = (Productos_Recyclon) CbxProducto.getSelectedItem();
+        TxtId.setText(String.valueOf(pro.getIdProducto()));
+        ftxPrecio.setText(String.valueOf(nf.format(pro.getPrecio())));
+        TxtNombre.setText(String.valueOf(pro.getNombre()));
+        TxtTipoMaterial.setText(String.valueOf(pro.getTipo_Material()));
+        TxtDescripcion.setText(String.valueOf(pro.getDescripcion()));
+        TxtId.setEnabled(false);
+        TxtNombre.setEditable(estado != CONSULTA);
+        TxtDescripcion.setEditable(estado != CONSULTA);
+        TxtTipoMaterial.setEditable(estado != CONSULTA);
+        ftxPrecio.setEditable(estado != CONSULTA);
+        BtnGuardar.setEnabled(estado != CONSULTA);
+        BtnModificar.setEnabled(estado != MODIFICACION);
+    }
+
+    private void cargarProducto() {
+        CbxProducto.removeAllItems();
+        pro = dao.getProductos();
+        for(Productos_Recyclon p :pro){
+            CbxProducto.addItem(p);
+        }
+    }
+    private void saveProducto(ActionEvent evt){
+        Productos_Recyclon p = new Productos_Recyclon();
+        p.setNombre(TxtNombre.getText());
+        p.setTipo_Material(TxtTipoMaterial.getText());
+        p.setDescripcion(TxtDescripcion.getText());
+        p.setPrecio(Double.parseDouble(ftxPrecio.getText()));
+        if(estado == MODIFICACION){
+            p.setIdProducto(Integer.parseInt(TxtId.getText()));
+            dao.modificarProducto(p);
+        }else{
+            dao.nuevoProducto(p);
+        }
+        pro = dao.getProductos();
+        estado = CONSULTA;
+        pos = pro.indexOf(p);
+        mostrar();
+    }
 }
