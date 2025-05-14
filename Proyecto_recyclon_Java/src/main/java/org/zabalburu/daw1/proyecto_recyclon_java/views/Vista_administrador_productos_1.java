@@ -22,10 +22,11 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     
     private int estado = CONSULTA;
     
-    private List<Productos_Recyclon> pro;
+    private List<Productos_Recyclon> productos;
+    
+    private int pos = 0;
     
     private DAO dao = new DAO();
-    private int pos = 0;
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
     /**
      * Creates new form Vista_administrador
@@ -320,7 +321,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void BtnAñadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirProductoActionPerformed
-        estado = NEW;  
+        estado = NEW;
         mostrar();
     }//GEN-LAST:event_BtnAñadirProductoActionPerformed
 
@@ -334,8 +335,13 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             int id = Integer.parseInt(TxtId.getText());
             if(dao.eliminarProducto(id)){
                 JOptionPane.showMessageDialog(this, "Producto Eliminado");
+                productos = dao.getProductos();
+                if(pos == productos.size()){
+                    pos--;
+                }
+                mostrar();
             }
-        }
+            }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -354,14 +360,12 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_CbxProductoActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        saveProducto(evt);
-        estado = CONSULTA;
+        saveProducto(evt);     
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void ftxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ftxPrecioActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -399,7 +403,6 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAñadirProducto;
     private javax.swing.JButton BtnEliminar;
@@ -427,20 +430,21 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void mostrar() {
+        Productos_Recyclon pro = (Productos_Recyclon) CbxProducto.getSelectedItem();
         if(estado == NEW){
             TxtId.setText("");
             TxtDescripcion.setText("");
             TxtNombre.setText("");
             TxtTipoMaterial.setText("");
-            ftxPrecio.setText("");
-            
+            ftxPrecio.setText("");   
         }
-        Productos_Recyclon pro = (Productos_Recyclon) CbxProducto.getSelectedItem();
+        if(estado != NEW){
         TxtId.setText(String.valueOf(pro.getIdProducto()));
         ftxPrecio.setText(String.valueOf(nf.format(pro.getPrecio())));
         TxtNombre.setText(String.valueOf(pro.getNombre()));
         TxtTipoMaterial.setText(String.valueOf(pro.getTipo_Material()));
         TxtDescripcion.setText(String.valueOf(pro.getDescripcion()));
+        }
         TxtId.setEnabled(false);
         TxtNombre.setEditable(estado != CONSULTA);
         TxtDescripcion.setEditable(estado != CONSULTA);
@@ -448,14 +452,17 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         ftxPrecio.setEditable(estado != CONSULTA);
         BtnGuardar.setEnabled(estado != CONSULTA);
         BtnModificar.setEnabled(estado != MODIFICACION);
+        BtnAñadirProducto.setEnabled(estado != MODIFICACION);
+        BtnEliminar.setEnabled(estado != MODIFICACION);   
     }
 
     private void cargarProducto() {
         CbxProducto.removeAllItems();
-        pro = dao.getProductos();
-        for(Productos_Recyclon p :pro){
+        productos = dao.getProductos();
+        for(Productos_Recyclon p : productos){
             CbxProducto.addItem(p);
         }
+        mostrar();
     }
     private void saveProducto(ActionEvent evt){
         Productos_Recyclon p = new Productos_Recyclon();
@@ -466,12 +473,11 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         if(estado == MODIFICACION){
             p.setIdProducto(Integer.parseInt(TxtId.getText()));
             dao.modificarProducto(p);
-        }else{
+        }else if(estado == NEW){
             dao.nuevoProducto(p);
         }
-        pro = dao.getProductos();
         estado = CONSULTA;
-        pos = pro.indexOf(p);
-        mostrar();
+        pos = productos.indexOf(p);
+        
     }
 }

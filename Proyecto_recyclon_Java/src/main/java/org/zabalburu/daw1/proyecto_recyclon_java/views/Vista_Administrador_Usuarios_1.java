@@ -4,6 +4,7 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.JFrame;
@@ -26,7 +27,9 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private DAO dao = new DAO();
     
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
-            
+    
+    private List<Usuarios> usuario;
+    
     /**
      * Creates new form Vista_administrador
      */
@@ -390,17 +393,15 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                 ==
                 JOptionPane.YES_OPTION){
             int id = Integer.parseInt(TxtId.getText());
-            if(dao.eliminarUsuario(id)){
+            dao.eliminarUsuario(id);
                 JOptionPane.showMessageDialog(this, "Usuario Eliminado");
-            }
-        }
+            }       
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         estado = MODIFICACION;
         mostrar();
     }//GEN-LAST:event_BtnModificarActionPerformed
-
     private void BtnModificarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarProductosActionPerformed
         Vista_administrador_productos_1 ventana = new Vista_administrador_productos_1();
         ventana.setVisible(true);
@@ -429,14 +430,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtTelefonoActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        Usuarios modificar = new Usuarios();
-        modificar.setEmail(TxtEmail.getText());
-        modificar.setNombre(TxtNombre.getText());
-        modificar.setApellido(TxtApellido.getText());
-        modificar.setDireccion(TxtDireccion.getText());
-        modificar.setCP(TxtCP.getText());
-        modificar.setTelefono(TxtTelefono.getText());
-        mostrar();
+        guardarUsuario(evt);
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     /**
@@ -517,6 +511,17 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     
     private void mostrar(){
         Usuarios seleccionado = (Usuarios) CbxUsuarios.getSelectedItem();
+        if(estado == NEW){
+            TxtId.setText("");
+            TxtApellido.setText("");
+            TxtCP.setText("");
+            TxtDireccion.setText("");
+            TxtEmail.setText("");
+            TxtNombre.setText("");
+            TxtTelefono.setText("");
+            TxtFecha.setText("");
+        }
+        if(estado != NEW){
         TxtId.setText(String.valueOf(seleccionado.getId_Usuario()));
         TxtNombre.setText((seleccionado.getNombre()));
         TxtApellido.setText(seleccionado.getApellido());
@@ -525,6 +530,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtFecha.setText(String.valueOf(seleccionado.getFecha_Creacion()));
         TxtTelefono.setText(String.valueOf(seleccionado.getTelefono()));
         TxtEmail.setText(String.valueOf(seleccionado.getEmail()));
+        }
         TxtApellido.setEditable(estado != CONSULTA);
         TxtNombre.setEditable(estado != CONSULTA);
         TxtCP.setEditable(estado != CONSULTA);
@@ -533,5 +539,27 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtTelefono.setEditable(estado != CONSULTA);
         TxtEmail.setEditable(estado != CONSULTA);
         TxtId.setEditable(false);
+        BtnGuardar.setEnabled(estado != CONSULTA);
+        BtnAñadirProducto.setEnabled(estado != MODIFICACION);
+        BtnModificar.setEnabled(estado != MODIFICACION);
+        BtnEliminar.setEnabled(estado != MODIFICACION);
+    }
+    private void guardarUsuario(ActionEvent evt){
+        Usuarios u = new Usuarios();
+        u.setNombre(TxtNombre.getText());
+        u.setTelefono(TxtTelefono.getText());
+        u.setCP(TxtCP.getText());
+        u.setApellido(TxtApellido.getText());
+        u.setEmail(TxtEmail.getText());
+        u.setDireccion(TxtDireccion.getText());
+        if(estado == MODIFICACION){
+        u.setId_Usuario(Integer.parseInt(TxtFecha.getText()));
+        dao.modificarUsuario(u);
+        }else if(estado == NEW){
+            dao.nuevoUsuario(u);
+        }
+        usuario = dao.getUsuarios();
+        estado = CONSULTA;
+        mostrar();
     }
 }

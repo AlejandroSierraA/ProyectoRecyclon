@@ -99,11 +99,12 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
     
     public void modificarProducto(Productos_Recyclon modificado){
         try {
-            PreparedStatement pst = cnn.prepareStatement("""
+            String sql = ("""
                                                          Update Productos_Recyclon
                                                          set nombre = ?,descripcion = ? ,tipo_Material = ?,
                                                          precio = ? Where idProducto = ?
                                                          """);
+            PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, modificado.getNombre());
             pst.setString(2, modificado.getDescripcion());
             pst.setString(3, modificado.getTipo_Material());
@@ -117,10 +118,10 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
     public void modificarUsuario(Usuarios modificado){
         try {
             PreparedStatement pst = cnn.prepareStatement("""
-                                                                     Update Usuarios set
-                                                                     nombre = ?,apellido = ?,email = ?,direccion = ?, CP = ?,fecha_Creacion = ?,telefono
-                                                                     Where id_Usuario = ?
-                                                                     """);
+                                                            Update Usuarios set
+                                                            nombre = ?,apellido = ?,email = ?,direccion = ?, CP = ?,fecha_Creacion = ?,telefono
+                                                            Where id_Usuario = ?
+                                                         """);
             pst.setString(1, modificado.getNombre());
             pst.setString(2, modificado.getApellido());
             pst.setString(3, modificado.getEmail());
@@ -129,6 +130,7 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
             pst.setDate(6, modificado.getFecha_Creacion());
             pst.setString(7, modificado.getTelefono());
             pst.setInt(8, modificado.getId_Usuario());
+            pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -140,7 +142,7 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
                      """;
         try {
             ResultSet rst = cnn.createStatement().executeQuery("""
-                                                                           Select max(id) + 1 as maximum
+                                                                           Select max(idProducto) + 1 as maximum
                                                                            From Productos_Recyclon
                                                                            """);
             rst.next();
@@ -195,18 +197,8 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
     }
     public boolean eliminarUsuario(int id){
         try {
+            
             PreparedStatement pst = cnn.prepareStatement(
-                    """
-                    Select count(*) as Cuenta
-                    From Usuario Where id_Usuario =?
-                    """);
-            pst.setInt(1, id);
-            ResultSet rst = pst.executeQuery();
-            rst.next();
-            if(rst.getInt("Cuenta")>0){
-                return false;
-            }
-            pst = cnn.prepareStatement(
             """
             Delete Usuarios Where id_Usuario = ?
             """);
@@ -220,19 +212,10 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
    }
     public boolean eliminarProducto(int id){
         try {
-            PreparedStatement pst = cnn.prepareStatement(
-                    """
-                        Select count(*) as Cuenta
-                        From Productos_Recyclon Where idProducto = ?
-                    """);
-            pst.setInt(1, id);
-            ResultSet rst = pst.executeQuery();
-            rst.next();
-            if(rst.getInt("Cuenta")>0){
-                return false;
-            }
-            pst = cnn.prepareStatement("""
-                                       Delete Producto_Recyclon Where idProducto = ?
+            
+            PreparedStatement pst = cnn.prepareStatement("""
+                                       Delete Productos_Recyclon 
+                                       Where idProducto = ?
                                        """);
             pst.setInt(1, id);
             pst.executeUpdate();
