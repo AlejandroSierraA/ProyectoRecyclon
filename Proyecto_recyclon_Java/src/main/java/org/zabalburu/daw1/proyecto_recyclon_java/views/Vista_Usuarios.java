@@ -20,13 +20,15 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
     
+    private List<Productos_Recyclon> productos;
+    
     /**
      * Creates new form Vista_administrador
      */
     public Vista_Usuarios() {
         initComponents();
         cargarProductos();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mostrar();
     }
 
     /**
@@ -40,8 +42,10 @@ public class Vista_Usuarios extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxProducto = new javax.swing.JComboBox<>();
@@ -56,24 +60,29 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         LblDescripcion = new javax.swing.JLabel();
         TxtDescripcion = new javax.swing.JTextField();
         PnlBotones = new javax.swing.JPanel();
-        BtnSalir = new javax.swing.JButton();
         BtnCerrarSesion = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
         jTextField5.setText("jTextField5");
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Usuarios");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
 
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(334, 334, 334)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel2)
+                .addGap(257, 257, 257)
                 .addComponent(LblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -81,7 +90,9 @@ public class Vista_Usuarios extends javax.swing.JFrame {
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(LblTitulo)
+                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(LblTitulo))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -199,14 +210,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
         );
 
-        BtnSalir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnSalir.setText("Salir y Cerrar Sesion");
-        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSalirActionPerformed(evt);
-            }
-        });
-
         BtnCerrarSesion.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         BtnCerrarSesion.setText("Salir");
         BtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -219,21 +222,17 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         PnlBotones.setLayout(PnlBotonesLayout);
         PnlBotonesLayout.setHorizontalGroup(
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnlBotonesLayout.createSequentialGroup()
-                .addGap(263, 263, 263)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlBotonesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnCerrarSesion)
-                .addGap(61, 61, 61)
-                .addComponent(BtnSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(340, 340, 340))
         );
         PnlBotonesLayout.setVerticalGroup(
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlBotonesLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnSalir)
-                    .addComponent(BtnCerrarSesion))
-                .addGap(21, 21, 21))
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(BtnCerrarSesion)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,17 +276,12 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
-    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-        Vista_Inicio_Sesion_Usuario vista = new Vista_Inicio_Sesion_Usuario();
-        vista.setVisible(true);
-    }//GEN-LAST:event_BtnSalirActionPerformed
-
     private void BtnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarSesionActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BtnCerrarSesionActionPerformed
 
     private void CbxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxProductoActionPerformed
-        // TODO add your handling code here:
+        mostrar();
     }//GEN-LAST:event_CbxProductoActionPerformed
 
     /**
@@ -334,7 +328,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCerrarSesion;
-    private javax.swing.JButton BtnSalir;
     private javax.swing.JComboBox<Productos_Recyclon> CbxProducto;
     private javax.swing.JLabel LblDescripcion;
     private javax.swing.JLabel LblIdProducto;
@@ -351,6 +344,8 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtTipoMaterial;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
@@ -361,6 +356,7 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         for(Productos_Recyclon p: pro){
             CbxProducto.addItem(p);
         }
+        mostrar();
     }
     
     private void mostrar(){
@@ -370,6 +366,11 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         TxtNombre.setText(String.valueOf(seleccionado.getNombre()));
         TxtTipoMaterial.setText(String.valueOf(seleccionado.getTipo_Material()));
         TxtPrecio.setText(String.valueOf(nf.format(seleccionado.getPrecio())));
+        TxtId.setEnabled(false);
+        TxtDescripcion.setEnabled(false);
+        TxtNombre.setEnabled(false);
+        TxtTipoMaterial.setEnabled(false);
+        TxtPrecio.setEnabled(false);
     }
 
 }

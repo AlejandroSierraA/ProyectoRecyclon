@@ -166,13 +166,13 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
     public Usuarios nuevoUsuario(Usuarios u){
         String sql
                 = """
-                  Insert Into Usuarios(id_Usuario,nombre,apellido,email,direccion,CP,fecha_Creacion,telefono)
-                  Values(?,?,?,?,?,?,?,?)
+                    Insert Into Usuarios(id_Usuario,nombre,apellido,email,direccion,CP,fecha_Creacion,telefono)
+                    Values(?,?,?,?,?,?,?,?)
                   """;
         try {
             ResultSet rst = cnn.createStatement().executeQuery("""
-                                                               Select max(id) + 1 as maximum
-                                                               From Usuarios
+                                                                  Select max(id_Usuario) + 1 as maximum
+                                                                  From Usuarios
                                                                """);
             rst.next();
             int nextId = rst.getInt("maximum");
@@ -194,6 +194,52 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return u;
+    }
+    public Administradores nuevoAdministrador(Administradores ad){
+        String sql = """
+                     Insert Into Administradores(id_Administrador,nombre,apellido,email,direccion,CP,fecha_Creacion,telefono)
+                     Values(?,?,?,?,?,?,?,?)                    
+                     """;
+        try {
+            ResultSet rst = cnn.createStatement().executeQuery("""
+                                                                           Select max(id_Administrador) + 1 as maximum
+                                                                           From Administradores
+                                                               """);
+            rst.next();
+            int nextId = rst.getInt("maximum");
+            if(rst.wasNull()){
+                nextId = 1;
+            }
+            ad.setId_Administrador(nextId);
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, ad.getId_Administrador());
+            pst.setString(2, ad.getNombre());
+            pst.setString(3, ad.getApellido());
+            pst.setString(4, ad.getEmail());
+            pst.setString(5, ad.getDireccion());
+            pst.setString(6, ad.getCP());
+            pst.setDate(7, ad.getFecha_Creacion());
+            pst.setString(8, ad.getTelefono());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return ad;
+    }
+    public int UsuarioConfirmacion (){
+        int nextId = 0;
+        try {
+            ResultSet rst = cnn.createStatement().executeQuery("""
+                                                                           Select max(id_Usuario) as maximum
+                                                                           from Usuarios
+                                                               """);
+            rst.next();
+            nextId = rst.getInt("maximum");
+            if(rst.wasNull());
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nextId;
     }
     public boolean eliminarUsuario(int id){
         try {

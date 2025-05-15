@@ -24,8 +24,6 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     
     private List<Productos_Recyclon> productos;
     
-    private int pos = 0;
-    
     private DAO dao = new DAO();
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
     /**
@@ -51,6 +49,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         BtnModificarUsuarios = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxProducto = new javax.swing.JComboBox<>();
@@ -87,25 +86,30 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(LblTitulo)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LblTitulo)
+                .addGap(72, 72, 72)
                 .addComponent(BtnModificarUsuarios)
-                .addGap(52, 52, 52))
+                .addGap(53, 53, 53))
         );
         PnlTituloLayout.setVerticalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(BtnModificarUsuarios)
                     .addComponent(LblTitulo))
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         LblProducto.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -336,10 +340,8 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             if(dao.eliminarProducto(id)){
                 JOptionPane.showMessageDialog(this, "Producto Eliminado");
                 productos = dao.getProductos();
-                if(pos == productos.size()){
-                    pos--;
-                }
-                mostrar();
+                cargarProducto();
+                CbxProducto.setSelectedItem(CbxProducto.getItemCount() == 1);
             }
             }
     }//GEN-LAST:event_BtnEliminarActionPerformed
@@ -355,12 +357,14 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarUsuariosActionPerformed
 
     private void CbxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxProductoActionPerformed
-        estado = CONSULTA;
-        mostrar();
+        if (CbxProducto.getSelectedItem() != null){
+            estado = CONSULTA;
+            mostrar();
+        }
     }//GEN-LAST:event_CbxProductoActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        saveProducto(evt);     
+        GuardarProducto(evt);     
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void ftxPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxPrecioActionPerformed
@@ -425,6 +429,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTipoMaterial;
     private javax.swing.JFormattedTextField ftxPrecio;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
@@ -462,9 +467,9 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         for(Productos_Recyclon p : productos){
             CbxProducto.addItem(p);
         }
-        mostrar();
+        
     }
-    private void saveProducto(ActionEvent evt){
+    private void GuardarProducto(ActionEvent evt){
         Productos_Recyclon p = new Productos_Recyclon();
         p.setNombre(TxtNombre.getText());
         p.setTipo_Material(TxtTipoMaterial.getText());
@@ -475,9 +480,11 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             dao.modificarProducto(p);
         }else if(estado == NEW){
             dao.nuevoProducto(p);
+            cargarProducto();
+            CbxProducto.setSelectedIndex(CbxProducto.getItemCount()-1);
+            
         }
         estado = CONSULTA;
-        pos = productos.indexOf(p);
         
     }
 }

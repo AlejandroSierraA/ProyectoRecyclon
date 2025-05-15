@@ -5,6 +5,7 @@
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
 import javax.swing.JFrame;
+import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 
@@ -13,7 +14,9 @@ import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
  * @author DAW1
  */
 public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
-
+    
+    private DAO dao =new DAO();
+    
     /**
      * Creates new form Vista_administrador
      */
@@ -34,6 +37,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         BtnModificar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblIdUsuario = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
@@ -61,19 +65,23 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         LblTitulo.setText("Registrar Usuario");
 
         BtnModificar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnModificar.setText("Registrar Usuario");
+        BtnModificar.setText("Registrar Administrador");
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModificarActionPerformed(evt);
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(271, 271, 271)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel2)
+                .addGap(186, 186, 186)
                 .addComponent(LblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnModificar)
@@ -84,6 +92,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(BtnModificar)
                     .addComponent(LblTitulo))
                 .addGap(16, 16, 16))
@@ -329,6 +338,9 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         modificar.setDireccion(TxtDireccion.getText());
         modificar.setCP(TxtCP.getText());
         modificar.setTelefono(TxtTelefono.getText());
+        dao.nuevoUsuario(modificar);
+        Vista_Usuarios vista = new Vista_Usuarios();
+        vista.setVisible(false);
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -422,5 +434,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

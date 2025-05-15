@@ -6,8 +6,13 @@ package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Administradores;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
+import org.zabalburu.daw1.proyecto_recyclon_java.views.Vista_Inicio_Sesion_Usuario;
+import org.zabalburu.daw1.proyecto_recyclon_java.views.Vista_Registrar_Administrador;
+import org.zabalburu.daw1.proyecto_recyclon_java.views.Vista_Usuarios;
 
 /**
  *
@@ -18,7 +23,7 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
     private int estado = CONSULTA;
     private DAO dao = new DAO();
     
-    private List<Administradores> admin = dao.getAdministradores();
+    private List<Administradores> admin;
             
     /**
      * Creates new form Vista_proyecto
@@ -40,13 +45,14 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         PnlCuerpo = new javax.swing.JPanel();
         LblIdAdmin = new javax.swing.JLabel();
-        TxtId = new javax.swing.JTextField();
         LblnombreAdmin = new javax.swing.JLabel();
         TxtNombre = new javax.swing.JTextField();
         LblApellidoAdmin = new javax.swing.JLabel();
         TxtApellido = new javax.swing.JTextField();
+        ftxId = new javax.swing.JFormattedTextField();
         LblTitulo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         PnlBotones = new javax.swing.JPanel();
         BtnIniciarSesion = new javax.swing.JButton();
         BtnRegistrarse = new javax.swing.JButton();
@@ -55,13 +61,6 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
 
         LblIdAdmin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LblIdAdmin.setText("Id Administrador");
-
-        TxtId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TxtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdActionPerformed(evt);
-            }
-        });
 
         LblnombreAdmin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblnombreAdmin.setText("Nombre Administrador");
@@ -83,6 +82,13 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
+        ftxId.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        ftxId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlCuerpoLayout = new javax.swing.GroupLayout(PnlCuerpo);
         PnlCuerpo.setLayout(PnlCuerpoLayout);
         PnlCuerpoLayout.setHorizontalGroup(
@@ -95,19 +101,19 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
                     .addComponent(LblApellidoAdmin))
                 .addGap(44, 44, 44)
                 .addGroup(PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TxtId)
                     .addComponent(TxtNombre)
-                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(ftxId))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         PnlCuerpoLayout.setVerticalGroup(
             PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCuerpoLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(64, 64, 64)
                 .addGroup(PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblIdAdmin)
-                    .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                    .addComponent(ftxId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
                 .addGroup(PnlCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblnombreAdmin)
                     .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,6 +135,8 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
@@ -138,9 +146,11 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
                 .addComponent(PnlCuerpo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addGap(109, 109, 109)
                 .addComponent(LblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(33, 33, 33))
         );
@@ -150,7 +160,8 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblTitulo)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PnlCuerpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -219,19 +230,31 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNombreActionPerformed
 
-    private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdActionPerformed
-
     private void BtnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIniciarSesionActionPerformed
-        Administradores ad = (Administradores) dao.getAdministradores();
-        if(TxtId.getText().equals(ad.getId_Administrador())){
-            if(TxtNombre.getText().equals(ad.getNombre())){
-                if(TxtApellido.getText().equals(ad.getApellido())){
-                    Vista_Administrador_Usuarios_1 vista = new Vista_Administrador_Usuarios_1();
-                    vista.setVisible(true);
-                }
+        Administradores ad = new Administradores();
+        admin = dao.getAdministradores();
+        boolean encontrado = false;
+        try{
+            int id = Integer.parseInt(ftxId.getText().trim());
+            ad.setId_Administrador(id);
+            ad.setNombre(TxtNombre.getText().trim());
+            ad.setApellido(TxtApellido.getText().trim());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "ID invalido. Debe ser un numero");
+        }
+        for(Administradores a: admin){
+            if(a.getId_Administrador()== ad.getId_Administrador()&&
+               a.getNombre().equalsIgnoreCase(ad.getNombre()) &&
+               a.getApellido().equalsIgnoreCase(ad.getApellido())){
+                encontrado = true;
+                break;
             }
+        }
+        if(encontrado){
+            Vista_Usuarios vista = new Vista_Usuarios();
+            vista.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Datos incorrectos");
         }
     }//GEN-LAST:event_BtnIniciarSesionActionPerformed
 
@@ -244,6 +267,10 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
        Vista_Inicio_Sesion_Usuario vista = new Vista_Inicio_Sesion_Usuario(); 
        vista.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ftxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,8 +319,9 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
     private javax.swing.JPanel PnlCuerpo;
     private javax.swing.JPanel PnlTitulo;
     private javax.swing.JTextField TxtApellido;
-    private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
+    private javax.swing.JFormattedTextField ftxId;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

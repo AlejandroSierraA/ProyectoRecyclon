@@ -5,6 +5,7 @@
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.JFrame;
@@ -24,6 +25,8 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     
     private int estado = CONSULTA;
     
+    private DateFormat df = DateFormat.getDateInstance();
+    
     private DAO dao = new DAO();
     
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
@@ -35,7 +38,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
      */
     public Vista_Administrador_Usuarios_1() {
         initComponents();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarUsuarios();
         mostrar();
         
@@ -53,6 +55,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         BtnModificarProductos = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxUsuarios = new javax.swing.JComboBox<>();
@@ -78,7 +81,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         BtnModificar = new javax.swing.JButton();
         BtnGuardar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Administrador");
@@ -91,12 +94,16 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(292, 292, 292)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel2)
+                .addGap(206, 206, 206)
                 .addComponent(LblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(BtnModificarProductos)
@@ -107,6 +114,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(BtnModificarProductos)
                     .addComponent(LblTitulo))
                 .addGap(17, 17, 17))
@@ -395,6 +403,8 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             int id = Integer.parseInt(TxtId.getText());
             dao.eliminarUsuario(id);
                 JOptionPane.showMessageDialog(this, "Usuario Eliminado");
+                cargarUsuarios();
+                CbxUsuarios.setSelectedItem(CbxUsuarios.getItemCount() == 1);
             }       
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
@@ -409,8 +419,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarProductosActionPerformed
 
     private void CbxUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxUsuariosActionPerformed
-      estado = CONSULTA;
-      mostrar();
+      if(CbxUsuarios.getSelectedItem() != null){
+          estado = CONSULTA;
+          mostrar();
+      }
     }//GEN-LAST:event_CbxUsuariosActionPerformed
 
     private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
@@ -499,6 +511,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
     private void cargarUsuarios(){
@@ -535,10 +548,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtNombre.setEditable(estado != CONSULTA);
         TxtCP.setEditable(estado != CONSULTA);
         TxtDireccion.setEditable(estado != CONSULTA);
-        TxtFecha.setEditable(false);
+        TxtFecha.setEditable(estado != CONSULTA);
         TxtTelefono.setEditable(estado != CONSULTA);
         TxtEmail.setEditable(estado != CONSULTA);
-        TxtId.setEditable(false);
+        TxtId.setEnabled(false);
         BtnGuardar.setEnabled(estado != CONSULTA);
         BtnAñadirProducto.setEnabled(estado != MODIFICACION);
         BtnModificar.setEnabled(estado != MODIFICACION);
@@ -557,9 +570,11 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         dao.modificarUsuario(u);
         }else if(estado == NEW){
             dao.nuevoUsuario(u);
+            cargarUsuarios();
+            CbxUsuarios.setSelectedItem(CbxUsuarios.getItemCount()-1);
         }
         usuario = dao.getUsuarios();
         estado = CONSULTA;
-        mostrar();
+       
     }
 }
