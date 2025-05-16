@@ -42,7 +42,6 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         PnlTitulo = new javax.swing.JPanel();
         PnlCuerpo = new javax.swing.JPanel();
         LblIdAdmin = new javax.swing.JLabel();
@@ -57,7 +56,7 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
         BtnIniciarSesion = new javax.swing.JButton();
         BtnRegistrarse = new javax.swing.JButton();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblIdAdmin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LblIdAdmin.setText("Id Usuario");
@@ -73,7 +72,7 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
         });
 
         LblApellidoAdmin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        LblApellidoAdmin.setText("Nombre Usuario");
+        LblApellidoAdmin.setText("Apellido Usuario");
 
         TxtApellido.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         TxtApellido.addActionListener(new java.awt.event.ActionListener() {
@@ -311,6 +310,5 @@ public class Vista_Inicio_Sesion_Usuario extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JFormattedTextField ftxId;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -72,7 +72,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
 
         jTextField5.setText("jTextField5");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Administrador");
@@ -154,6 +154,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             }
         });
 
+        ftxPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         ftxPrecio.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         ftxPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,11 +435,11 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             TxtDescripcion.setText("");
             TxtNombre.setText("");
             TxtTipoMaterial.setText("");
-            ftxPrecio.setText("");   
+            ftxPrecio.setValue(0.0);
         }
         if(estado != NEW){
         TxtId.setText(String.valueOf(pro.getIdProducto()));
-        ftxPrecio.setText(String.valueOf(nf.format(pro.getPrecio())));
+        ftxPrecio.setValue(pro.getPrecio());
         TxtNombre.setText(String.valueOf(pro.getNombre()));
         TxtTipoMaterial.setText(String.valueOf(pro.getTipo_Material()));
         TxtDescripcion.setText(String.valueOf(pro.getDescripcion()));
@@ -467,7 +468,8 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
         p.setNombre(TxtNombre.getText());
         p.setTipo_Material(TxtTipoMaterial.getText());
         p.setDescripcion(TxtDescripcion.getText());
-        p.setPrecio(Double.parseDouble(ftxPrecio.getText()));
+        Number n = (Number) ftxPrecio.getValue();
+        p.setPrecio(n.doubleValue());
         if(estado == MODIFICACION){
             p.setIdProducto(Integer.parseInt(TxtId.getText()));
             dao.modificarProducto(p);
@@ -475,9 +477,8 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
             dao.nuevoProducto(p);
             cargarProducto();
             CbxProducto.setSelectedIndex(CbxProducto.getItemCount()-1);
-            
         }
         estado = CONSULTA;
-        
+        mostrar();
     }
 }

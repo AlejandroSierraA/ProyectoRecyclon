@@ -5,7 +5,10 @@
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
 import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
@@ -20,12 +23,14 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     
     private DateFormat df = DateFormat.getDateInstance();
     
+    private List<Usuarios> usuario;
+    
     /**
      * Creates new form Vista_administrador
      */
     public Vista_Registrar_Usuarios() {
         initComponents();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mostrar();
     }
 
     /**
@@ -42,7 +47,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         BtnModificar = new javax.swing.JButton();
         PnlDatos = new javax.swing.JPanel();
         LblIdUsuario = new javax.swing.JLabel();
-        TxtId = new javax.swing.JTextField();
         LblEmail = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
         LblNombre = new javax.swing.JLabel();
@@ -53,15 +57,16 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         TxtDireccion = new javax.swing.JTextField();
         LblCP = new javax.swing.JLabel();
         TxtCP = new javax.swing.JTextField();
-        TxtFecha = new javax.swing.JTextField();
         LblTelefono = new javax.swing.JLabel();
         TxtTelefono = new javax.swing.JTextField();
         LblFechaCreacion = new javax.swing.JLabel();
+        ftxFecha = new javax.swing.JFormattedTextField();
+        ftxId = new javax.swing.JFormattedTextField();
         PnlBotones = new javax.swing.JPanel();
-        BtnEliminar = new javax.swing.JButton();
+        BtnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Registrar Usuario");
@@ -97,13 +102,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
 
         LblIdUsuario.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblIdUsuario.setText("Id Usuario");
-
-        TxtId.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdActionPerformed(evt);
-            }
-        });
 
         LblEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblEmail.setText("Email");
@@ -155,13 +153,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        TxtFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFechaActionPerformed(evt);
-            }
-        });
-
         LblTelefono.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblTelefono.setText("Telefono");
 
@@ -175,6 +166,17 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         LblFechaCreacion.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblFechaCreacion.setText("Fecha creacion");
 
+        ftxFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        ftxFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+
+        ftxId.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        ftxId.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        ftxId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlDatosLayout = new javax.swing.GroupLayout(PnlDatos);
         PnlDatos.setLayout(PnlDatosLayout);
         PnlDatosLayout.setHorizontalGroup(
@@ -187,29 +189,25 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
                             .addComponent(LblIdUsuario)
                             .addComponent(LblNombre))
                         .addGap(45, 45, 45)
+                        .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ftxId)
+                            .addComponent(TxtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(TxtNombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TxtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                                    .addComponent(TxtNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblApellido)
-                                    .addComponent(LblCP)))
-                            .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LblEmail))))
+                            .addComponent(LblEmail)
+                            .addComponent(LblApellido)
+                            .addComponent(LblCP)))
                     .addComponent(LblDireccion)
                     .addGroup(PnlDatosLayout.createSequentialGroup()
                         .addComponent(LblFechaCreacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ftxFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LblTelefono)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addComponent(TxtApellido)
                     .addComponent(TxtTelefono)
                     .addComponent(TxtCP))
@@ -221,9 +219,9 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblIdUsuario)
-                    .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblEmail)
-                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ftxId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,18 +241,18 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
                         .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)))
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblFechaCreacion)
                     .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblTelefono))
+                    .addComponent(LblTelefono)
+                    .addComponent(ftxFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
-        BtnEliminar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        BtnEliminar.setText("Guardar");
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnGuardar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        BtnGuardar.setText("Guardar");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
+                BtnGuardarActionPerformed(evt);
             }
         });
 
@@ -272,7 +270,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlBotonesLayout.createSequentialGroup()
                 .addGap(258, 258, 258)
-                .addComponent(BtnEliminar)
+                .addComponent(BtnGuardar)
                 .addGap(58, 58, 58)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -282,7 +280,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlBotonesLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnEliminar)
+                    .addComponent(BtnGuardar)
                     .addComponent(jButton1))
                 .addGap(21, 21, 21))
         );
@@ -311,10 +309,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdActionPerformed
-
     private void TxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtEmailActionPerformed
@@ -327,18 +321,35 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDireccionActionPerformed
 
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        usuario = dao.getUsuarios();
+        boolean encontrado = false;
+        
         Usuarios modificar = new Usuarios();
+        Number n = (Number) ftxId.getValue();
+        modificar.setId_Usuario(n.intValue());
         modificar.setEmail(TxtEmail.getText());
         modificar.setNombre(TxtNombre.getText());
         modificar.setApellido(TxtApellido.getText());
         modificar.setDireccion(TxtDireccion.getText());
         modificar.setCP(TxtCP.getText());
         modificar.setTelefono(TxtTelefono.getText());
+        Date fecha = (Date) ftxFecha.getValue();
+        modificar.setFecha_Creacion(fecha);
+        for(Usuarios u: usuario){
+        if(u.getId_Usuario() == modificar.getId_Usuario()){
+        encontrado = true;
+            }
+        }
+        if(!encontrado){
         dao.nuevoUsuario(modificar);
         Vista_Usuarios vista = new Vista_Usuarios();
-        vista.setVisible(false);
-    }//GEN-LAST:event_BtnEliminarActionPerformed
+        vista.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ese id ya existe");
+        }
+        
+    }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         Vista_Registrar_Administrador vista = new Vista_Registrar_Administrador();
@@ -353,10 +364,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtCPActionPerformed
 
-    private void TxtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtFechaActionPerformed
-
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoActionPerformed
@@ -364,6 +371,10 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ftxIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,7 +419,7 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JLabel LblApellido;
     private javax.swing.JLabel LblCP;
@@ -426,10 +437,14 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtCP;
     private javax.swing.JTextField TxtDireccion;
     private javax.swing.JTextField TxtEmail;
-    private javax.swing.JTextField TxtFecha;
-    private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JFormattedTextField ftxFecha;
+    private javax.swing.JFormattedTextField ftxId;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrar() {
+        ftxFecha.setValue(new Date());
+    }
 }

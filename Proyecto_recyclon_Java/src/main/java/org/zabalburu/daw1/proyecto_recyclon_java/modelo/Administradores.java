@@ -4,7 +4,7 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.modelo;
 
-import java.sql.Date;
+import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

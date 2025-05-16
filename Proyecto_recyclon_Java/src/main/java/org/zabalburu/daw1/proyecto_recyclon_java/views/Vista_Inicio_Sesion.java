@@ -56,7 +56,7 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
         BtnIniciarSesion = new javax.swing.JButton();
         BtnRegistrarse = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblIdAdmin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LblIdAdmin.setText("Id Administrador");

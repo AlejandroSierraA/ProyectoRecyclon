@@ -7,8 +7,8 @@ package org.zabalburu.daw1.proyecto_recyclon_java.views;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
@@ -70,10 +70,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtDireccion = new javax.swing.JTextField();
         LblCP = new javax.swing.JLabel();
         TxtCP = new javax.swing.JTextField();
-        TxtFecha = new javax.swing.JTextField();
         LblTelefono = new javax.swing.JLabel();
         TxtTelefono = new javax.swing.JTextField();
         LblFechaCreacion = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JFormattedTextField();
         PnlBotones = new javax.swing.JPanel();
         BtnAñadirProducto = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
@@ -184,13 +184,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             }
         });
 
-        TxtFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFechaActionPerformed(evt);
-            }
-        });
-
         LblTelefono.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblTelefono.setText("Telefono");
 
@@ -203,6 +196,14 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
 
         LblFechaCreacion.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblFechaCreacion.setText("Fecha creacion");
+
+        txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlDatosLayout = new javax.swing.GroupLayout(PnlDatos);
         PnlDatos.setLayout(PnlDatosLayout);
@@ -223,9 +224,9 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PnlDatosLayout.createSequentialGroup()
                                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(TxtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TxtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                                             .addComponent(TxtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TxtFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LblApellido)
@@ -237,7 +238,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                                         .addComponent(LblEmail)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtEmail)
+                                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                                     .addComponent(TxtApellido)
                                     .addComponent(TxtCP)
                                     .addComponent(TxtTelefono))))
@@ -246,7 +247,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblDireccion)
                             .addComponent(LblFechaCreacion))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(617, Short.MAX_VALUE))))
         );
         PnlDatosLayout.setVerticalGroup(
             PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,9 +277,9 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblFechaCreacion)
-                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTelefono)
-                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
         );
 
@@ -427,10 +428,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtCPActionPerformed
 
-    private void TxtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtFechaActionPerformed
-
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoActionPerformed
@@ -438,6 +435,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         guardarUsuario(evt);
     }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -501,10 +502,10 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private javax.swing.JTextField TxtCP;
     private javax.swing.JTextField TxtDireccion;
     private javax.swing.JTextField TxtEmail;
-    private javax.swing.JTextField TxtFecha;
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JFormattedTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
     private void cargarUsuarios(){
@@ -525,7 +526,8 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             TxtEmail.setText("");
             TxtNombre.setText("");
             TxtTelefono.setText("");
-            TxtFecha.setText("");
+            txtFecha.setValue(new Date());
+                    
         }
         if(estado != NEW){
         TxtId.setText(String.valueOf(seleccionado.getId_Usuario()));
@@ -533,7 +535,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtApellido.setText(seleccionado.getApellido());
         TxtCP.setText(seleccionado.getCP());
         TxtDireccion.setText(seleccionado.getDireccion());
-        TxtFecha.setText(String.valueOf(seleccionado.getFecha_Creacion()));
+        txtFecha.setValue(seleccionado.getFecha_Creacion());
         TxtTelefono.setText(String.valueOf(seleccionado.getTelefono()));
         TxtEmail.setText(String.valueOf(seleccionado.getEmail()));
         }
@@ -541,7 +543,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         TxtNombre.setEditable(estado != CONSULTA);
         TxtCP.setEditable(estado != CONSULTA);
         TxtDireccion.setEditable(estado != CONSULTA);
-        TxtFecha.setEditable(estado != CONSULTA);
+        txtFecha.setEditable(estado != CONSULTA);
         TxtTelefono.setEditable(estado != CONSULTA);
         TxtEmail.setEditable(estado != CONSULTA);
         TxtId.setEnabled(false);
@@ -558,16 +560,17 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         u.setApellido(TxtApellido.getText());
         u.setEmail(TxtEmail.getText());
         u.setDireccion(TxtDireccion.getText());
+        Date fecha = (Date) txtFecha.getValue();
+        u.setFecha_Creacion(fecha);
         if(estado == MODIFICACION){
-        u.setId_Usuario(Integer.parseInt(TxtFecha.getText()));
+        //u.setId_Usuario(Integer.parseInt(TxtFecha.getText()));
         dao.modificarUsuario(u);
         }else if(estado == NEW){
             dao.nuevoUsuario(u);
             cargarUsuarios();
             CbxUsuarios.setSelectedItem(CbxUsuarios.getItemCount()-1);
         }
-        usuario = dao.getUsuarios();
         estado = CONSULTA;
-       
+        mostrar();
     }
 }

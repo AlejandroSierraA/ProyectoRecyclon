@@ -4,9 +4,13 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.util.Date;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Administradores;
+import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 
 /**
  *
@@ -16,12 +20,14 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     
     private DAO dao = new DAO();
     
+    private List<Administradores> admin;
+    
     /**
      * Creates new form Vista_administrador
      */
     public Vista_Registrar_Administrador() {
         initComponents();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mostrar();
     }
 
     /**
@@ -49,15 +55,15 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
         TxtDireccion = new javax.swing.JTextField();
         LblCP = new javax.swing.JLabel();
         TxtCP = new javax.swing.JTextField();
-        TxtFecha = new javax.swing.JTextField();
         LblTelefono = new javax.swing.JLabel();
         TxtTelefono = new javax.swing.JTextField();
         LblFechaCreacion = new javax.swing.JLabel();
+        ftxFecha = new javax.swing.JFormattedTextField();
         PnlBotones = new javax.swing.JPanel();
         BtnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Registrar Administrador");
@@ -151,13 +157,6 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
             }
         });
 
-        TxtFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        TxtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFechaActionPerformed(evt);
-            }
-        });
-
         LblTelefono.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblTelefono.setText("Telefono");
 
@@ -170,6 +169,9 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
 
         LblFechaCreacion.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         LblFechaCreacion.setText("Fecha creacion");
+
+        ftxFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        ftxFecha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout PnlDatosLayout = new javax.swing.GroupLayout(PnlDatos);
         PnlDatos.setLayout(PnlDatosLayout);
@@ -191,9 +193,9 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                                 .addComponent(LblEmail))
                             .addGroup(PnlDatosLayout.createSequentialGroup()
                                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TxtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                                     .addComponent(TxtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ftxFecha))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LblApellido)
@@ -233,9 +235,9 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblFechaCreacion)
-                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTelefono)
-                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ftxFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -291,9 +293,9 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(PnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(PnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -318,6 +320,8 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDireccionActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        admin = dao.getAdministradores();
+        boolean encontrado =false;
         Administradores modificar = new Administradores();
         modificar.setEmail(TxtEmail.getText());
         modificar.setNombre(TxtNombre.getText());
@@ -325,9 +329,20 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
         modificar.setDireccion(TxtDireccion.getText());
         modificar.setCP(TxtCP.getText());
         modificar.setTelefono(TxtTelefono.getText());
+        Date fecha = (Date) ftxFecha.getValue();
+        modificar.setFecha_Creacion(fecha);
+        for(Administradores ad: admin){
+        if(ad.getId_Administrador()== modificar.getId_Administrador()){
+        encontrado = true;
+            }
+        }
+        if(!encontrado){
         dao.nuevoAdministrador(modificar);
-        Vista_Administrador_Usuarios_1 vista = new Vista_Administrador_Usuarios_1();
+        Vista_Usuarios vista = new Vista_Usuarios();
         vista.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ese id ya existe");
+        }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -342,10 +357,6 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     private void TxtCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtCPActionPerformed
-
-    private void TxtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtFechaActionPerformed
 
     private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
@@ -424,10 +435,14 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
     private javax.swing.JTextField TxtCP;
     private javax.swing.JTextField TxtDireccion;
     private javax.swing.JTextField TxtEmail;
-    private javax.swing.JTextField TxtFecha;
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JFormattedTextField ftxFecha;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrar() {
+        ftxFecha.setValue(new Date());
+    }
 }

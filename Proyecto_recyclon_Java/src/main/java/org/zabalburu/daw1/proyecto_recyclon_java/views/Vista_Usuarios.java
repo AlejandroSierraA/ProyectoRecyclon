@@ -40,9 +40,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
@@ -61,13 +58,7 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         PnlBotones = new javax.swing.JPanel();
         BtnCerrarSesion = new javax.swing.JButton();
 
-        jLabel4.setText("jLabel4");
-
-        jTextField5.setText("jTextField5");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Usuarios");
@@ -337,9 +328,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtTipoMaterial;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
     
     private void cargarProductos(){

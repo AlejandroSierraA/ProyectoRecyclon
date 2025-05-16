@@ -127,7 +127,7 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
             pst.setString(3, modificado.getEmail());
             pst.setString(4, modificado.getDireccion());
             pst.setString(5, modificado.getCP());
-            pst.setDate(6, modificado.getFecha_Creacion());
+            pst.setDate(6, new java.sql.Date(modificado.getFecha_Creacion().getTime()));
             pst.setString(7, modificado.getTelefono());
             pst.setInt(8, modificado.getId_Usuario());
             pst.executeUpdate();
@@ -187,7 +187,7 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
             pst.setString(4, u.getEmail());
             pst.setString(5, u.getDireccion());
             pst.setString(6, u.getCP());
-            pst.setDate(7, u.getFecha_Creacion());
+            pst.setDate(7, new java.sql.Date(u.getFecha_Creacion().getTime()));
             pst.setString(8, u.getTelefono());
             pst.executeUpdate();
         } catch (SQLException ex) {
@@ -218,7 +218,7 @@ private Productos_Recyclon crearProducto(ResultSet rst) throws SQLException {
             pst.setString(4, ad.getEmail());
             pst.setString(5, ad.getDireccion());
             pst.setString(6, ad.getCP());
-            pst.setDate(7, ad.getFecha_Creacion());
+            pst.setDate(7, new java.sql.Date(ad.getFecha_Creacion().getTime()));
             pst.setString(8, ad.getTelefono());
             pst.executeUpdate();
         } catch (SQLException ex) {
