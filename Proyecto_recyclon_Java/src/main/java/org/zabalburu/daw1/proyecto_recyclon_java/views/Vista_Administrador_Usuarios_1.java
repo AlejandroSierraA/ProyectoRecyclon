@@ -103,9 +103,9 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel2)
-                .addGap(206, 206, 206)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
                 .addComponent(BtnModificarProductos)
                 .addGap(38, 38, 38))
         );
@@ -333,7 +333,7 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
                 .addComponent(BtnModificar)
                 .addGap(18, 18, 18)
                 .addComponent(BtnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         PnlBotonesLayout.setVerticalGroup(
             PnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

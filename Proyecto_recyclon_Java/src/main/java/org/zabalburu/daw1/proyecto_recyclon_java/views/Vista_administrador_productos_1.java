@@ -97,7 +97,7 @@ public class Vista_administrador_productos_1 extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
-                .addGap(72, 72, 72)
+                .addGap(78, 78, 78)
                 .addComponent(BtnModificarUsuarios)
                 .addGap(53, 53, 53))
         );

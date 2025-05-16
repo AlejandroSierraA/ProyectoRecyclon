@@ -82,7 +82,7 @@ public class Vista_Registrar_Administrador extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
-                .addGap(55, 55, 55)
+                .addGap(70, 70, 70)
                 .addComponent(BtnModificar)
                 .addGap(20, 20, 20))
         );

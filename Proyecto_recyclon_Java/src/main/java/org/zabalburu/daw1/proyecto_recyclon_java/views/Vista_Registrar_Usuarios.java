@@ -4,6 +4,7 @@
  */
 package org.zabalburu.daw1.proyecto_recyclon_java.views;
 
+import java.text.DateFormat;
 import javax.swing.JFrame;
 import org.zabalburu.daw1.proyecto_recyclon_java.dao.DAO;
 import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Productos_Recyclon;
@@ -16,6 +17,8 @@ import org.zabalburu.daw1.proyecto_recyclon_java.modelo.Usuarios;
 public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     
     private DAO dao =new DAO();
+    
+    private DateFormat df = DateFormat.getDateInstance();
     
     /**
      * Creates new form Vista_administrador
@@ -81,9 +84,9 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel2)
-                .addGap(186, 186, 186)
-                .addComponent(LblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LblTitulo)
+                .addGap(52, 52, 52)
                 .addComponent(BtnModificar)
                 .addGap(39, 39, 39))
         );
