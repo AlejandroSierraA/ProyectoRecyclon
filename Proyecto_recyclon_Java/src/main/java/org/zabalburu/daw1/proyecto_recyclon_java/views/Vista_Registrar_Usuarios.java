@@ -40,7 +40,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         BtnModificar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblIdUsuario = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
@@ -75,16 +74,12 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
-
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(263, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
                 .addGap(52, 52, 52)
                 .addComponent(BtnModificar)
@@ -95,7 +90,6 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addComponent(BtnModificar)
                     .addComponent(LblTitulo))
                 .addGap(16, 16, 16))
@@ -437,6 +431,5 @@ public class Vista_Registrar_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

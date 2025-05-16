@@ -55,7 +55,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
         BtnModificarProductos = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxUsuarios = new javax.swing.JComboBox<>();
@@ -94,16 +93,12 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
-
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(282, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
                 .addGap(85, 85, 85)
                 .addComponent(BtnModificarProductos)
@@ -114,7 +109,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlTituloLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addComponent(BtnModificarProductos)
                     .addComponent(LblTitulo))
                 .addGap(17, 17, 17))
@@ -511,7 +505,6 @@ public class Vista_Administrador_Usuarios_1 extends javax.swing.JFrame {
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtTelefono;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
     private void cargarUsuarios(){

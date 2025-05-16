@@ -45,7 +45,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         PnlTitulo = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         PnlDatos = new javax.swing.JPanel();
         LblProducto = new javax.swing.JLabel();
         CbxProducto = new javax.swing.JComboBox<>();
@@ -73,16 +72,12 @@ public class Vista_Usuarios extends javax.swing.JFrame {
         LblTitulo.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         LblTitulo.setText("Usuarios");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
-
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel2)
-                .addGap(263, 263, 263)
+                .addGap(340, 340, 340)
                 .addComponent(LblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -90,9 +85,7 @@ public class Vista_Usuarios extends javax.swing.JFrame {
             PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlTituloLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(LblTitulo))
+                .addComponent(LblTitulo)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -344,7 +337,6 @@ public class Vista_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtTipoMaterial;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField5;

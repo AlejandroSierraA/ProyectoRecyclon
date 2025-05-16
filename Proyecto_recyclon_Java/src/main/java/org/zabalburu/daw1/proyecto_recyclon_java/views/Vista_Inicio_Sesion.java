@@ -52,7 +52,6 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
         ftxId = new javax.swing.JFormattedTextField();
         LblTitulo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         PnlBotones = new javax.swing.JPanel();
         BtnIniciarSesion = new javax.swing.JButton();
         BtnRegistrarse = new javax.swing.JButton();
@@ -135,8 +134,6 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/zabalburu/daw1/proyecto_recyclon_java/icon/Captura de pantalla 2025-05-15 134420.png"))); // NOI18N
-
         javax.swing.GroupLayout PnlTituloLayout = new javax.swing.GroupLayout(PnlTitulo);
         PnlTitulo.setLayout(PnlTituloLayout);
         PnlTituloLayout.setHorizontalGroup(
@@ -146,9 +143,7 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
                 .addComponent(PnlCuerpo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(PnlTituloLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(40, 170, Short.MAX_VALUE)
                 .addComponent(LblTitulo)
                 .addGap(71, 71, 71)
                 .addComponent(jButton1)
@@ -160,8 +155,7 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(PnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblTitulo)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel3))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PnlCuerpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -322,6 +316,5 @@ public class Vista_Inicio_Sesion extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JFormattedTextField ftxId;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
