@@ -1,0 +1,313 @@
+nav {
+	display:flex; /* en línea con el logo*/
+	padding: 5px;
+	color:#fff;
+	background-color:#3bc0b8;
+	border-radius: 3px;
+	font-size:1.5vw;
+	height:50px;	
+}
+
+nav #logo {
+	height:50px; /* como el nav */
+	padding:0px;
+	margin:0px;
+	box-sizing:border-box; /* Que no sume más tamaño los bordes y márgenes de los elementos contenidos*/
+}
+
+nav #logo img {
+		height:100%; /* La imagen se amolda al 100% en altura a la del bloque que la contiene */
+	}
+
+/* Que no se vean en un principio ni el checkbox ni los spans para controlar el menú móvil: */	
+#label-menu, #btn-menu {
+	display:none;
+} 
+
+/* -------------------------------- Menú navegación en el móvil ---------------------------------*/
+/* ----------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 640px) { 
+	/* Cuando estamos en móvil y no está marcado el check que tenemos escondido y al que accedemos por la x o la hamburguesa, no se debe de ver el menú que contiene los enlaces*/
+	#btn-menu:not(:checked) ~ #menu {
+		display:none;
+	}
+	/* Cuando está marcado ese check sí queremos que se vea el menú con los enlaces */
+	#btn-menu:checked ~ #menu {
+		display:block;
+	}
+	.responsive2{
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+	text-align:center;
+	}
+	footer{
+		background-color:#3bc0b8;
+		font-size:100%;
+		margin:auto;
+		padding-left:8px;
+	}
+	a{
+		color:black;
+		text-decoration:none;
+	}
+	/* Aspecto para la X y la hamburguesa que están dentro de label-menu la cual controla el checkbox y que ahora queremos que se vea su contenido con este aspecto: */	
+	#label-menu {
+		display:block;
+		height:25px;
+		width:18px;
+		text-align:center;
+		font-size: 3em;
+		font-weight:bold;
+		padding:0.2em 0.4em;
+		border: 1px solid white;
+		border-radius:0.3em;
+		position:absolute;
+		right:0.7em;
+		top:1.3em;	
+		z-index:999;	
+	}
+	/* no se ve el botón de cierre (el de la hamburguesa se ve p.d. si no está marcado el checkbox) */
+	#cerrar {
+		display:none;
+	}
+
+	/* No se ve el botón del hamburguesa cuando se marcha el check... */
+	#btn-menu:checked ~ label span#abrir {
+		display:none;
+	}
+	/* ...y se ve el botón de la X si está marcado el check */
+	#btn-menu:checked ~ label span#cerrar {
+		display:block;
+		font-weight:normal;
+		padding-top:2px;
+	}
+
+	/* el aspecto que tendrá el menú con los enlaces cuando está marcado el check: */
+	#menu {
+		position:absolute;
+		top:55px;
+		right:10px;
+		height:auto;
+		width:35%;
+		background-color:#3bc0b8;
+		padding-top:0.1em;
+		padding-right:0.5em;
+		opacity:0.85;
+		border-radius: 4px;
+		font-size:2.5em;
+		
+	}
+	nav div#menu ul a {
+		color:#282a35;
+		text-decoration:none;
+		
+	}
+	nav div#menu ul, nav div#menu ul li {
+		display:block;
+		text-align:right;
+		list-style-type: none;
+		padding:0px;
+		
+	}
+	nav div#menu ul li {
+		line-height:2em;
+		padding-right:2px;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+	}
+	/* fin del aspecto del menú con los enlaces en el móvil */
+
+
+}
+/* -------------------------------- Características que cambian en el PC ---------------------------------*/
+/* -------------------------------------------------------------------------------------------------------*/
+@media only screen and (min-width: 640px) { 
+	body {
+		font-size:2vw;
+		background-color:#3bc0b8;
+		
+	}
+
+	/* ----------- contenido ------------- */
+	.main {
+		margin: 0px;
+		padding: 0px;
+		display: flex; /* Flexbox: los elementos que estén dentro serán flexibles */
+		flex-flow: row; /* Flexbox: colocados en fila en PC*/
+	}
+	
+	.main > article {
+
+		flex: 1 1 33%; /* flex-grow (ocupa 1 vez lo de 1) flex-shrink (cómo se reducirá, poco:1 )  flex-basis (proporción de la anchura)*/
+	}
+	
+	
+	/*------------- Menú de navegación --------------- */
+
+	#menu { /* Bloque que contiene la ul con las opciones de menú*/
+		width:100%;
+		display:flex;
+		justify-content:flex-end; /* en PC a la derecha*/
+	}
+
+	#menu ul {
+		display:flex;
+		flex-direction:row; /* la disposición de la ul es en fila no en columna */
+		margin:0px;		
+	}
+
+	#menu ul li { /* nos aseguramos de que los li en esta caso queden en línea no en bloque como son por defecto y dejamos en el móvil */
+		display:inline;
+		border-top:none;
+		border-right:solid;
+		border-width: 1px;
+	}
+
+	#menu li a { /* lo mismo con los enlaces, cambiamo su comportamiento a etiquetas de bloque y así tiene en cuenta los márgenes verticales... */
+		display:block; 
+		text-decoration: none;
+		padding:15px 20px;
+		color: #282a35;
+	}	
+
+	#menu li a:hover { 
+		font-weight:bold;
+	}
+	footer{
+		font-size:50%;
+	}
+	td{
+		width:50%;
+	}
+	tr{
+		height:20px;
+		width:100%;
+	}
+	#CuerpoPagina{
+		width:100%;
+		background-color:white;
+	}
+	table{
+		width:100%;
+		text-align:center;
+	}
+	#imagenes{
+		text-align:center;
+		display: block;
+		max-width: 100%;
+		width:100%;
+	}
+	section{
+		padding-top:20px;
+		text-align:center;
+	}
+
+/* ======================== */
+.productos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  margin:auto;
+}
+
+.card_image {
+  width: 100%;
+  height: auto;
+}
+
+.card_body {
+  padding: 10px;
+}
+
+.card_title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.card_description {
+  font-size: 14px;
+  color: #333;
+}
+
+.card:hover .card_description {
+	opacity: 1;
+	translate: 0;
+}
+#PiePagina{
+	background-color:#3bc0b8;
+}
+#imagenes2{
+	text-align:center;
+	display: block;
+	max-width: 100%;
+	width:100%;
+	vertical-align:right;
+	}
+.tdTabla2{
+	width:25%;
+	text-align:center;
+}
+.imgTabla2{
+	width:150px;
+	height:130px;
+}
+#segundaTabla{
+	background-color:white;
+}
+.tdPiePagina{
+	width:25%;
+	font-size:120%;
+}
+a{
+	color:black;
+	text-decoration:none;
+}
+}
+.responsive{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+	text-align:center;
+  }
+
+  .categoria {
+    flex: 1 1 200px;
+    max-width: 250px;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .categoria img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+	
+  }
+
+  .categoria h4 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: black;
+  }
+
+  @media (max-width: 600px) {
+    .categoria {
+      flex: 1 1 100%;
+    }
+  }
